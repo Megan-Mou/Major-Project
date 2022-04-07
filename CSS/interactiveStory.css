@@ -267,7 +267,7 @@ text{
 }
 
 .choices{
-    height: 50px;
+    height: 55px;
     width: 700px;
     background-color: rgb(95, 81, 43);
     border-color: rgb(245, 240, 213);
@@ -280,12 +280,12 @@ text{
 
 #firstChoice{
     left: 385px;
-    top: 430px;
+    top: 330px;
 }
 
 #secondChoice{
     left: 385px;
-    top: 530px;
+    top: 400px;
 }
 
 #selection{

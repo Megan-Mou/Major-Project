@@ -1,3 +1,4 @@
+//Variables
 var alreadyPlayed = 0;
 var audioFirst = new Audio("Sounds/Melancholy.mp3");
 $(audioFirst).animate({ volume: 0 });
@@ -27,6 +28,7 @@ var numberCount2 = 0;
 var inspection = 0;
 //var changeScreen = 0;
 
+//Arrays
 arrCover = [
     { name: 'firstImage', img: 'Images/First.jpg' },
     { name: 'secondImage', img: 'Images/Second.jpg' },
@@ -71,12 +73,14 @@ arrTransition = [
     { name: 'Image32', img: 'Transition/Sand/32.png', id: '#Image32', id2: '#Image31' }
 ];
 
+//For loop for creating the cover background
 for (var i = 0; i < arrCover.length; i++) {
     var createHTML = "<img id='" + arrCover[i].name + "' img src='" + arrCover[i].img + "' style='display: none; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px'></div>"
     console.log(createHTML);
     $('.coverBackground').append(createHTML);
 };
 
+//Function for transitioning between images
 function callCover(wordID, secondNumberID) {
     var coverID = "#" + wordID;
     var secondID = "#" + secondNumberID;
@@ -94,6 +98,7 @@ function callCover(wordID, secondNumberID) {
 
 var audioThird = '';
 
+//Function for calling the next line of the plot
 function nextLine(trigger, name, ID, time, title, text, characterVisible, characterHidden, characterID, extraTrigger, bonusTrigger, fileName, contextBackground) {
     var restriction = "#" + ID;
     var titleFull = "#" + title;
@@ -218,8 +223,8 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                 else if (trigger == 27){
                     $('#characterI').fadeOut(time*3);
                     $('#characterE').fadeIn(3000);
-                    $('#firstChoice').fadeIn(800);
-                    $('#secondChoice').fadeIn(800);
+                    $('#firstChoice').fadeIn(3000);
+                    $('#secondChoice').fadeIn(3000);
                 };
             });
         };
@@ -233,6 +238,7 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
     });
 };
 
+//Transition to the next scene - functions are interlinked
 function secondScene(initiateNumber) {
     $('#characterA').fadeOut();
     $('#textBox').fadeOut();
@@ -443,6 +449,7 @@ function transitionSand6(time) {
     }, time);
 };
 
+//Deleting elements
 function deleteElements(v, w, x, y, z, i) {
     var firstElement = "#" + v;
     var secondElement = "#" + w;
@@ -459,7 +466,7 @@ function deleteElements(v, w, x, y, z, i) {
 };
 
 //alert('To progress onwards, click on the area around the text.');
-
+//calling for transitions
 callCover('firstImage');
 (callCover('firstImage', 'secondImage'));
 setTimeout(function () { callCover('secondImage', 'thirdImage') }, 5500);
@@ -492,6 +499,7 @@ $('#bambooSlip').on("click", function () {
     };
 });
 
+//Starting the game - plot line follows
 $('#startGame').click(function () {
     //Add audio here
     $(audioFirst).animate({ volume: 0 }, 400);
@@ -518,6 +526,7 @@ $('#startGame').click(function () {
     setTimeout(function () { nextLine(9, 'Assistant', 'backgroundContext', 800, 'characterName', 'Lady...the governor is seeking for you.', 6, 3, 'characterB', 0, 9, 'Sand'), 2400 });
 });
 
+//Must click to initiate
 $('.normalBackground').on('click', function () {
     //if(changeScreen == 0){
     console.log('Clicked on study');
@@ -540,11 +549,14 @@ $('.normalBackground').on('click', function () {
     //};
 });
 
+//Array
 var arrStudy = [
     { name: 'studySecond', img: 'Images/Study-Second.jpg' },
     { name: 'studyThird', img: 'Images/Study-Third.jpg' },
     { name: 'studyFourth', img: 'Images/Study-Fourth.jpg' },
 ];
+
+//Database
 var displayID = '';
 var apikey = '61a3fa9234abfc7f972efc07';
 var url = 'https://mmou1226-b813.restdb.io/rest/ancientchina';
@@ -624,6 +636,7 @@ function getCharacters(itemID, url, apikey) {
     });
 };
 
+//OOP classes
 class Character {
     constructor(name, age, top, left) {
         this.name = name;
@@ -701,6 +714,7 @@ class Female extends Character {
     }
 };
 
+//Prologue ending
 $('#context').on('click', function () {
     deleteElements('characterB', 'characterC', 'redJadeite', 'studyFourth', 'context', 'prologue');
     $('#selection').fadeIn(3000);
@@ -724,6 +738,7 @@ $('#context').on('click', function () {
     });
 });
 
+//calling the database
 getCharacter(url, apikey, 2);
 getCharacter(url, apikey, 3);
 getCharacter(url, apikey, 4);
@@ -731,6 +746,7 @@ getCharacter(url, apikey, 5);
 var destinationWent = 0;
 var firstTime = 1;
 
+//Confirming character selection
 $("#confirmSelection").click(function(){
     $("#mapE").fadeIn(3000);
     $(audioThird).animate({ volume: 0}, 5000);
@@ -761,9 +777,16 @@ $("#confirmSelection").click(function(){
                 setTimeout(function(){
                     nextLine(26, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some dishes for you.', 13, 1, 'characterI', 0, undefined, undefined, 2);
                     nextLine(27, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you slightly stood at the end of the staircase for a little moment and looked around. You noticed two unordinary tables of<br>guests situated just underneath your normal private room.', undefined, 2, 'characterE', undefined, 27, 'Sand');
+                    $("#firstChoice").click(function(){
+                        console.log("a.	(undesirable choice) You wanted to but your moral conscience tells you it is inappropriate to overhear other people’s conversations…after a short debate in your conscious mind managed to stay but not move. (context) Ladies within this period of time were strictly educated to behave according to a set of social expectations, including not overhearing the business of others.");
+                    });
+                    $("#secondChoice").click(function(){
+                        console.log("b. (desirable choice) You followed social expectations...plot progresses");
+                    });
                 }, 3000);
         });
     });
+    //Trying to code if the user could return to the big map and choose the second choice
     $("#templeDestination").click(function(){
         deleteElements(undefined, undefined, undefined, undefined, 'streetDestination', 'templeDestination');
         if(destinationWent == 0){
@@ -774,7 +797,3 @@ $("#confirmSelection").click(function(){
         };
     });
 });
-
-function afterTemple(){
-
-};
