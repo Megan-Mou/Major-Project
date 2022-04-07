@@ -797,3 +797,5 @@ $("#confirmSelection").click(function(){
         };
     });
 });
+
+//The code was not actually finished...
