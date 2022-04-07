@@ -266,6 +266,28 @@ text{
     color: white;
 }
 
+.choices{
+    height: 50px;
+    width: 700px;
+    background-color: rgb(95, 81, 43);
+    border-color: rgb(245, 240, 213);
+    position: absolute;
+    display: none;
+    z-index: 125;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+}
+
+#firstChoice{
+    left: 385px;
+    top: 430px;
+}
+
+#secondChoice{
+    left: 385px;
+    top: 530px;
+}
+
 #selection{
     width: 100%;
     height: 100%;

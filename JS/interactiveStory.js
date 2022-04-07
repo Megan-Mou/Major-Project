@@ -113,7 +113,7 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     $(titleFull).replaceWith('<text id="' + title + '">' + name + '</text>')
                     $(titleFull).fadeIn(time);
                     characterName = characterName + 2;
-                    console.log('Required ' + characterName, characterTitle + ' for showing name!!!');
+                    console.log('Required ' + characterName + ' or ' + title + ' for showing name!!!');
                 };
                 if (characterDisappear == characterHidden) {
                     $(titleFull).fadeOut(time / 10);
@@ -214,6 +214,12 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     deleteElements('study', 'studySecond', 'studyThird', 'archeology', "inspecting", "redJadeite");
                 } else if (trigger == 25){
                     deleteElements(undefined, undefined, undefined, undefined, "backgroundInformation", "textBox");
+                }
+                else if (trigger == 27){
+                    $('#characterI').fadeOut(time*3);
+                    $('#characterE').fadeIn(3000);
+                    $('#firstChoice').fadeIn(800);
+                    $('#secondChoice').fadeIn(800);
                 };
             });
         };
@@ -221,7 +227,7 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
             $('#textBox').fadeIn(time);
         }else if(contextBackground == 2){
             setTimeout(function(){
-                $('#textBox').fadeIn(time*5);
+                $('#textBox').fadeIn(3000);
             });
         }
     });
@@ -741,19 +747,20 @@ $("#confirmSelection").click(function(){
             $(audioFourth).animate({ volume: 0.35 }, 2000);
             deleteElements(undefined, undefined, undefined, undefined, 'streetDestination', 'templeDestination');
             $("#teaHouseDestination").fadeIn(3000);
-            if(firstTime == 1){
+            //if(firstTime == 1){
             setTimeout(function(){
                 nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge', 9, undefined, undefined, undefined, undefined, undefined, 1);
             }, 5000);
                 nextLine(24, '', 'backgroundInformation', 800, 'characterTitle', 'Ancient historical records noted for the prosperity of the last capital of the Shang Dynasty. Bearing a long history of over three thousand years...<br>Zhaoge flourished the most under the reign of Di Xin, the King Zhou of Shang.');
                 nextLine(25, '', 'backgroundInformation', 800, undefined, '', 11, undefined, undefined, undefined, undefined, undefined, 0);
-                firstTime = 0;
-            };
+                //firstTime = 0;
+            //};
             $("#teaHouseDestination").click(function(){;
                 $("#teaHouseDestination").fadeOut(800);
                 $("#storeE").fadeIn(3000);
                 setTimeout(function(){
-                    nextLine(26, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some dishes for you.', 13, 1, 'characterI', 0, 2);
+                    nextLine(26, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some dishes for you.', 13, 1, 'characterI', 0, undefined, undefined, 2);
+                    nextLine(27, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you slightly stood at the end of the staircase for a little moment and looked around. You noticed two unordinary tables of<br>guests situated just underneath your normal private room.', undefined, 2, 'characterE', undefined, 27, 'Sand');
                 }, 3000);
         });
     });
