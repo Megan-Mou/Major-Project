@@ -8,9 +8,9 @@ $('body').on('click', function () {
     if (alreadyPlayed == 0) {
         audioFirst.play();
         $(audioFirst).animate({ volume: 0.6 }, 2000);
-        console.log(alreadyPlayed);
         console.log('Successfully played');
         alreadyPlayed = 1;
+        console.log(alreadyPlayed);
     };
 });
 
@@ -27,6 +27,7 @@ var numberCount = 1;
 var numberCount2 = 0;
 var inspection = 0;
 //var changeScreen = 0;
+//var bodyAlreadyUsed = 0;
 
 //Arrays
 arrCover = [
@@ -144,7 +145,10 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     //$('#nextScene').fadeIn(3500);
                     $('body').on('click', function () {
                         if (nextSceneControl == 2) {
-                            setTimeout(function () { secondScene(33) }, 200);
+                            setTimeout(function () { 
+                                secondScene(33) 
+                                nextSceneControl = 3;
+                            }, 200);
                         };
                     });
                     nextSceneControl = nextSceneControl + 1;
@@ -474,7 +478,10 @@ setTimeout(function () { callCover('thirdImage', 'fourthImage') }, 11000);
 setTimeout(function () { callCover('fourthImage', 'fifthImage') }, 16500);
 setTimeout(function () { callCover(0, 'bambooSlip') }, 1500);
 setTimeout(function () { callCover(0, 'introduction') }, 3000);
-$('#bambooSlip').on("click", function () {
+$('body').on("click", function () {
+    setTimeout(function () { 
+    if (alreadyPlayed == 1) {
+        console.log("Waiting to change");
     if (timeControl == 0) {
         $('#introduction').fadeOut(800);
         setTimeout(function () {
@@ -497,6 +504,8 @@ $('#bambooSlip').on("click", function () {
     } else {
         console.log('Already changed');
     };
+};
+    }, 2000);
 });
 
 //Starting the game - plot line follows
@@ -527,8 +536,9 @@ $('#startGame').click(function () {
 });
 
 //Must click to initiate
-$('.normalBackground').on('click', function () {
+//$('.normalBackground').on('click', function () {
     //if(changeScreen == 0){
+    if (nextSceneControl == 3) {
     console.log('Clicked on study');
     $('#characterA').fadeIn(800);
     $('#textBox').fadeIn(800);
@@ -546,8 +556,9 @@ $('.normalBackground').on('click', function () {
     nextLine(20);
     nextLine(21, 'You', 'backgroundContext', 800, 'characterName', 'A red jadeite...', 9);
     nextLine(22, '', 'backgroundContext', 800, 'characterName', '', 9);
+    };
     //};
-});
+//});
 
 //Array
 var arrStudy = [
@@ -799,3 +810,7 @@ $("#confirmSelection").click(function(){
 });
 
 //The code was not actually finished...
+
+//1. Eliminate previous unneccessary errors and sophisticate the code more
+//2. Enhance user accessibility and potentially "soft code" more?
+//3. Progress on storyline and update/debug along the way
