@@ -538,11 +538,6 @@ $('#startGame').click(function () {
 //Must click to initiate
 //$('.normalBackground').on('click', function () {
     //if(changeScreen == 0){
-    if (nextSceneControl == 3) {
-    console.log('Clicked on study');
-    $('#characterA').fadeIn(800);
-    $('#textBox').fadeIn(800);
-    nextLine(10, 'Governor', 'backgroundContext', 800, 'characterName', '...latest reports mentioned the appearance of a red jadeite lying absurdly at a corner of the temporary excavation site.<br>The discoverer was an experienced antique appraiser who asserts for the jadeite not belonging to any current dynasties', 3, 4, 'characterC', 0);
     nextLine(11, 'Governor', 'backgroundContext', 800, 'characterName', 'yet he affirms for its invaluableness.', 6);
     nextLine(12, 'Governor', 'backgroundContext', 800, 'characterName', 'You belong to a family of one of the oldest lines for archaeology. What is your speak on this matter.', 7, 0, '', 12);
     //add transition to desk
