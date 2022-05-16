@@ -26,8 +26,8 @@ var timeCount = 0;
 var numberCount = 1;
 var numberCount2 = 0;
 var inspection = 0;
-//var changeScreen = 0;
-//var bodyAlreadyUsed = 0;
+var changeScreen = 0;
+var bodyAlreadyUsed = 0;
 
 //Arrays
 arrCover = [
@@ -147,7 +147,8 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                         if (nextSceneControl == 2) {
                             setTimeout(function () { 
                                 secondScene(33) 
-                                nextSceneControl = 3;
+                                bodyAlreadyUsed = 1;
+                                console.log(bodyAlreadyUsed);
                             }, 200);
                         };
                     });
@@ -475,10 +476,14 @@ callCover('firstImage');
 (callCover('firstImage', 'secondImage'));
 setTimeout(function () { callCover('secondImage', 'thirdImage') }, 5500);
 setTimeout(function () { callCover('thirdImage', 'fourthImage') }, 11000);
-setTimeout(function () { callCover('fourthImage', 'fifthImage') }, 16500);
+setTimeout(function () { 
+    callCover('fourthImage', 'fifthImage');
+    bodyAlreadyUsed = 1;
+}, 16500);
 setTimeout(function () { callCover(0, 'bambooSlip') }, 1500);
 setTimeout(function () { callCover(0, 'introduction') }, 3000);
-$('body').on("click", function () {
+if (changeScreen == 0){
+    $('body').on("click", function () {
     setTimeout(function () { 
     if (alreadyPlayed == 1) {
         console.log("Waiting to change");
@@ -496,9 +501,14 @@ $('body').on("click", function () {
             $('#introduction').fadeIn(2000);
         }, 800);
         $('#fifthImage').on("click", function () {
+            if (bodyAlreadyUsed == 1){
             deleteElements('firstImage', 'secondImage', 'thirdImage', 'fourthImage', 'introduction', 'bambooSlip');
             $("#startGame").fadeIn(7000);
             $(audioFirst).animate({ volume: 0 }, 8000);
+            alreadyPlayed = 1;
+            }else{
+                console.log('Wait for animation to complete');
+            }
         });
         timeControl = 2;
     } else {
@@ -506,7 +516,8 @@ $('body').on("click", function () {
     };
 };
     }, 2000);
-});
+    });
+};
 
 //Starting the game - plot line follows
 $('#startGame').click(function () {
@@ -536,8 +547,12 @@ $('#startGame').click(function () {
 });
 
 //Must click to initiate
-//$('.normalBackground').on('click', function () {
+$('.normalBackground').on('click', function () {
     //if(changeScreen == 0){
+    console.log('Clicked on study');
+    $('#characterA').fadeIn(800);
+    $('#textBox').fadeIn(800);
+    nextLine(10, 'Governor', 'backgroundContext', 800, 'characterName', '...latest reports mentioned the appearance of a red jadeite lying absurdly at a corner of the temporary excavation site.<br>The discoverer was an experienced antique appraiser who asserts for the jadeite not belonging to any current dynasties', 3, 4, 'characterC', 0);
     nextLine(11, 'Governor', 'backgroundContext', 800, 'characterName', 'yet he affirms for its invaluableness.', 6);
     nextLine(12, 'Governor', 'backgroundContext', 800, 'characterName', 'You belong to a family of one of the oldest lines for archaeology. What is your speak on this matter.', 7, 0, '', 12);
     //add transition to desk
@@ -551,9 +566,8 @@ $('#startGame').click(function () {
     nextLine(20);
     nextLine(21, 'You', 'backgroundContext', 800, 'characterName', 'A red jadeite...', 9);
     nextLine(22, '', 'backgroundContext', 800, 'characterName', '', 9);
-    };
     //};
-//});
+});
 
 //Array
 var arrStudy = [
