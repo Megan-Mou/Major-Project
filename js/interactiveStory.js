@@ -178,6 +178,7 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                     $('#characterC').fadeOut(2400);
                     inspection = 1;
                 } else if (trigger == 19) {
+                    hoverOver = 2;
                     if (inspection == 1) {
                         $('#characterA').fadeOut(800);
                         $('#characterName').fadeOut(800);
@@ -209,13 +210,14 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                             $('#redJadeite').css({ top: '180px', width: '18%' });
                         };
                     };
-                } else if (trigger == 20) {
-                    $('#inspecting').fadeIn(800 * 2);
-                    $('#redJadeite').fadeIn(800 * 2);
-                    $('#characterA').fadeIn(800);
-                    $('#textBox').fadeIn(800);
-                } else if (trigger == 21) {
-                    setTimeout(function () {
+                // } else if (trigger == 20) {
+                //     $('#inspecting').fadeIn(800 * 2);
+                //     $('#redJadeite').fadeIn(800 * 2);
+                //     $('#characterA').fadeIn(800);
+                //     $('#textBox').fadeIn(800);
+                } else if (trigger == 20 && hoverOver == 4) {
+                        hoverOver = 5;
+                        setTimeout(function () {
                         deleteElements(undefined, undefined, undefined, undefined, "characterA", "textBox");
                         setTimeout(function () {
                             $('#context').fadeIn(2000)
@@ -223,10 +225,10 @@ function nextLine(trigger, name, ID, time, title, text, characterVisible, charac
                         }, 1000);
                     }, 200);
                     deleteElements('study', 'studySecond', 'studyThird', 'archeology', "inspecting", "redJadeite");
-                } else if (trigger == 23){
+                } else if (trigger == 22){
                     deleteElements(undefined, undefined, undefined, undefined, "backgroundInformation", "textBox");
                 }
-                else if (trigger == 25){
+                else if (trigger == 24){
                     $('#characterI').fadeOut(time*3);
                     $('#characterE').fadeIn(3000);
                     $('#firstChoice').fadeIn(3000);
@@ -547,10 +549,11 @@ $('#startGame').click(function () {
     setTimeout(function () { nextLine(9, 'Assistant', 'backgroundContext', 800, 'characterName', 'Lady...the governor is seeking for you.', 6, 3, 'characterB', 0, 9, 'Sand'), 2400 });
 });
 
-function hover (one, two, three, four, time, text, text1){
+function hover (zero, one, two, three, four, time, text, text1){
     var threeID = '#' + three;
     var fourID = '#' + four;
-    $('#textBox').fadeIn(time);
+    $('#textBox').fadeIn(800);
+    $(zero).fadeIn(time);
     $(one).fadeIn(time);
     $(two).fadeIn(time);
     $(threeID).replaceWith('<text id=' + three + '>' + text + '</text>')
@@ -565,7 +568,7 @@ $('.normalBackground').on('mouseover', function () {
     console.log('Clicked on study');
     if(hoverOver == 0){
         hoverOver = 1;
-        hover('#characterA', '#characterC', 'backgroundContext', 'characterName', 800, '...latest reports mentioned the appearance of a red jadeite lying absurdly at a corner of the temporary excavation site.<br>The discoverer was an experienced antique appraiser who asserts for the jadeite not belonging to any current dynasties', 'Governor');
+        hover('#characterA', '#characterC', undefined, 'backgroundContext', 'characterName', 800, '...latest reports mentioned the appearance of a red jadeite lying absurdly at a corner of the temporary excavation site.<br>The discoverer was an experienced antique appraiser who asserts for the jadeite not belonging to any current dynasties', 'Governor');
     //nextLine(10, 'Governor', 'backgroundContext', 800, 'characterName', '...latest reports mentioned the appearance of a red jadeite lying absurdly at a corner of the temporary excavation site.<br>The discoverer was an experienced antique appraiser who asserts for the jadeite not belonging to any current dynasties', 3, 4, 'characterC', 0);
     nextLine(10, 'Governor', 'backgroundContext', 800, 'characterName', 'yet he affirms for its invaluableness.', 6);
     nextLine(11, 'Governor', 'backgroundContext', 800, 'characterName', 'You belong to a family of one of the oldest lines for archaeology. What is your speak on this matter.', 7, 0, '', 11);
@@ -578,9 +581,21 @@ $('.normalBackground').on('mouseover', function () {
     nextLine(17, 'You', 'backgroundContext', 800, 'characterName', 'Yes, Governor.', 9);
     nextLine(18, 'Governor', 'backgroundContext', 800, 'characterName', 'You will have the ability to observe it anytime you want to, but only in this room.', 9, 4, '', 1, 18, 'Sand');
     nextLine(19);
-    nextLine(20, 'You', 'backgroundContext', 800, 'characterName', 'A red jadeite...', 9);
-    nextLine(21, '', 'backgroundContext', 800, 'characterName', '', 9);
+    $('body').on('mouseover', function () {
+        if(hoverOver == 2){
+            hoverOver = 3;
+        setTimeout(function(){
+            hover('#inspecting', '#redJadeite', '#characterA', 'backgroundContext', 'characterName', 1600, 'A red jadeite...', 'You');
+            setTimeout(function(){hoverOver = 4}, 1800);
+            }, 13000);
+            console.log('called on function');
+        };
+    //nextLine(20, 'You', 'backgroundContext', 800, 'characterName', 'A red jadeite...', 9);
+    if (hoverOver == 4){
+    nextLine(20, '', 'backgroundContext', 800, 'characterName', '', 9);
+    };
     //};
+    });
     };
 });
 
@@ -801,18 +816,18 @@ $("#confirmSelection").click(function(){
             if(firstTime == 0){
                 firstTime = 1;
             setTimeout(function(){
-                hover(undefined, undefined, 'backgroundInformation', undefined, 800, '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge');
+                hover(undefined, undefined, undefined, 'backgroundInformation', undefined, 800, '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge');
                 //nextLine(22, '', 'backgroundInformation', 800, 'characterTitle', '1600 BC - 1046 BC<br>Shang Dynasty, Zhaoge', 9, undefined, undefined, undefined, undefined, undefined, 1);
-                nextLine(22, '', 'backgroundInformation', 800, 'characterTitle', 'Ancient historical records noted for the prosperity of the last capital of the Shang Dynasty. Bearing a long history of over three thousand years...<br>Zhaoge flourished the most under the reign of Di Xin, the King Zhou of Shang.');
-                nextLine(23, '', 'backgroundInformation', 800, undefined, '', 11, undefined, undefined, undefined, undefined, undefined, 0);
+                nextLine(21, '', 'backgroundInformation', 800, 'characterTitle', 'Ancient historical records noted for the prosperity of the last capital of the Shang Dynasty. Bearing a long history of over three thousand years...<br>Zhaoge flourished the most under the reign of Di Xin, the King Zhou of Shang.');
+                nextLine(22, '', 'backgroundInformation', 800, undefined, '', 11, undefined, undefined, undefined, undefined, undefined, 0);
             }, 5000);
             };
             $("#teaHouseDestination").click(function(){;
                 $("#teaHouseDestination").fadeOut(800);
                 $("#storeE").fadeIn(3000);
                 setTimeout(function(){
-                    nextLine(24, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some dishes for you.', 13, 1, 'characterI', 0, undefined, undefined, 2);
-                    nextLine(25, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you slightly stood at the end of the staircase for a little moment and looked around. You noticed two unordinary tables of<br>guests situated just underneath your normal private room.', undefined, 2, 'characterE', undefined, 25, 'Sand');
+                    nextLine(23, 'Maid', 'backgroundInformation', 800, 'characterTitle', 'Miss, please wait for a moment, the private room is already prepared for you upstairs, I will go order some dishes for you.', 13, 1, 'characterI', 0, undefined, undefined, 2);
+                    nextLine(24, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you slightly stood at the end of the staircase for a little moment and looked around. You noticed two unordinary tables of<br>guests situated just underneath your normal private room.', undefined, 2, 'characterE', undefined, 24, 'Sand');
                     $("#firstChoice").click(function(){
                         console.log("a.	(undesirable choice) You wanted to but your moral conscience tells you it is inappropriate to overhear other people’s conversations…after a short debate in your conscious mind managed to stay but not move. (context) Ladies within this period of time were strictly educated to behave according to a set of social expectations, including not overhearing the business of others.");
                     });
