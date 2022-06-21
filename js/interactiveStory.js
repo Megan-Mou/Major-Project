@@ -1,5 +1,6 @@
 //Variables
 var alreadyPlayed = 0;
+var wrongChoice = 0;
 var audioFirst = new Audio("Sounds/Melancholy.mp3");
 $(audioFirst).animate({ volume: 0 });
 
@@ -617,10 +618,10 @@ $('.normalBackground').on('mouseover', function () {
         $('#transparentBackground').on('mouseover', function () {
             if (hoverOver == 2 && inspection == 3) {
                 hoverOver = 3;
-                setTimeout(function () {
-                    hover('#inspecting', '#redJadeite', '#characterA', 'backgroundContext', 'characterName', 1600, 'A red jadeite...', 'You');
-                    setTimeout(function () { hoverOver = 4 }, 400);
-                }, 1200);
+                //setTimeout(function () {
+                hover('#inspecting', '#redJadeite', '#characterA', 'backgroundContext', 'characterName', 1600, 'A red jadeite...', 'You');
+                setTimeout(function () { hoverOver = 4 }, 400);
+                //}, 1200);
                 console.log('called on function');
             };
             //nextLine(20, 'You', 'backgroundContext', 800, 'characterName', 'A red jadeite...', 9);
@@ -867,7 +868,7 @@ $("#confirmSelection").click(function () {
                 nextLine(23, '', 'backgroundInformation', 800, 'characterTitle', 'After the maid left, you slightly stood at the end of the staircase for a little moment and looked around. You noticed two unordinary tables of<br>guests situated just underneath your normal private room.', undefined, 2, 'characterE', undefined, 23, 'Sand');
                 $("#firstChoice").click(function () {
                     console.log("a.	(undesirable choice) You wanted to but your moral conscience tells you it is inappropriate to overhear other people’s conversations…after a short debate in your conscious mind managed to stay but not move. (context) Ladies within this period of time were strictly educated to behave according to a set of social expectations, including not overhearing the business of others.");
-                    $('transparentBackground').on('mouseover', function(){});
+                    $('transparentBackground').on('mouseover', function () { });
                 });
                 $("#secondChoice").click(function () {
                     console.log("b. (desirable choice) You followed social expectations...plot progresses");
@@ -897,9 +898,44 @@ $("#confirmSelection").click(function () {
 //2. Enhance user accessibility and potentially "soft code" more?
 //3. Progress on storyline and update/debug along the way
 
+arrWrong = [
+    '',
+];
+
+var indexNumber = 0;
+
+function updateArray(numberWrong) {
+    if (indexNumber != numberWrong){
+        indexNumber = indexNumber + 1;
+        console.log(indexNumber);
+    }else{
+        console.log(indexNumber = numberWrong);
+    };
+    for (var i = 0; i < numberWrong + 1; i++) {
+        //find index of object
+        objectIndex = arrWrong.findIndex((object => object[indexNumber]));
+        //log to console
+        console.log("Before update: ", arrWrong[objectIndex]);
+        //update object properties
+        arrWrong[objectIndex] = 'Ladies at that time...';
+        //log to console again
+        console.log("After update: ", arrWrong[objectIndex]);
+    };
+};
+
 $('#menuButton').click(function () {
     $('#recallBackground').fadeIn(100);
     $('#backButton').fadeIn(100);
+    if (wrongChoice == 0) {
+        //loop for creating all wrong choice records
+        console.log('code something that records why it was the wrong choice');
+        /*for (var i = 0; i < arrCover.length; i++) {
+            var createHTML = "<img id='" + arrCover[i].name + "' img src='" + arrCover[i].img + "' style='display: none; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px'></div>"
+            console.log(createHTML);
+            $('.coverBackground').append(createHTML);
+        };*/
+        updateArray(2);
+    };
 });
 
 $('#backButton').click(function () {
